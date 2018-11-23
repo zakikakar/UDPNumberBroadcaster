@@ -29,7 +29,7 @@ s = setup_udp_socket()
 
 while True:
     # Broadcast message to port 64545 via UDP Socket
-    s.sendto((str(number)).encode(), ('<broadcast>', 64545))
+    s.sendto(str(number).encode(), ('<broadcast>', 64545))
 
     sense.show_message(str(number), scroll_speed=0.1, text_colour=yellow, back_colour=blue)
 
