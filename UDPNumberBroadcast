@@ -54,8 +54,8 @@ while True:
             # Convert dictionary to JSON Object (str) and then to bytes
             dataBytes = (json.dumps(data, default=str)).encode()
 
-            # Broadcast message to port 37020 via UDP Socket
-            server.sendto(dataBytes, ('<broadcast>', 37020))
+            # Broadcast message to port 64545 via UDP Socket
+            server.sendto(dataBytes, ('<broadcast>', 64545))
 
             # Show a message on the display
             sense.show_message( "sent", scroll_speed=0.05 )
