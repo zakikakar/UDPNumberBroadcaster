@@ -33,5 +33,5 @@ while True:
 
     sense.show_message(str(number), scroll_speed=0.1, text_colour=yellow, back_colour=blue)
 
-    number += 1
+    number+=1
     sleep(1)
