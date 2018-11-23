@@ -1,6 +1,7 @@
 from sense_hat import SenseHat
 from time import sleep
 import socket
+import json
 
 sense = SenseHat()
 
@@ -18,18 +19,24 @@ def setup_udp_socket():
 
 sense.clear()
 
+s = setup_udp_socket()
+
 red = (255,0,0)
 green = (0,255,0)
 blue = (0,0,255)
 yellow = (255,255,0)
 nothing = (0,0,0)
+
 number = 1
 
-s = setup_udp_socket()
 
 while True:
+    data = {
+        "n": number
+    }
+
     # Broadcast message to port 64545 via UDP Socket
-    s.sendto(str(number).encode(), ('<broadcast>', 64545))
+    s.sendto((json.dumps(data, default = str)).encode(), ('<broadcast>', 64545))
 
     sense.show_message(str(number), scroll_speed=0.1, text_colour=yellow, back_colour=blue)
 

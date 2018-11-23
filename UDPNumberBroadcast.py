@@ -37,34 +37,30 @@ def get_sense_data():
 server = setup_udp_socket()
 
 
-# while True:
-#     # check hvis man har trykket på joystick for at stoppe/starte program (while løkke forneden)
-#     for e in sense.stick.get_events():
-#         if e.action == 'pressed' and e.direction == 'middle':
-#             state = True if state == False else False
+while True:
+    # check hvis man har trykket på joystick for at stoppe/starte program (while løkke forneden)
+    for e in sense.stick.get_events():
+        if e.action == 'pressed' and e.direction == 'middle':
+            state = True if state == False else False
 
-number = 0
-# run program
-while(True):
-    # data = get_sense_data() 
-    data = {
-        'number': number
-    }
-    time = data["date"] - timestamp # træk timestamp fra datetime i data
+    # run program
+    while(state):
+        data = get_sense_data()
+        time = data["date"] - timestamp # træk timestamp fra datetime i data
 
-    # Sæt et delay for hvor ofte den skal læse data (delay = 1 sekund)
-    if time.seconds > delay:
+        # Sæt et delay for hvor ofte den skal læse data (delay = 1 sekund)
+        if time.seconds > delay:
 
-        # Convert dictionary to JSON Object (str) and then to bytes
-        dataBytes = (json.dumps(data, default=str)).encode()
+            # Convert dictionary to JSON Object (str) and then to bytes
+            dataBytes = (json.dumps(data, default=str)).encode()
 
-        # Broadcast message to port 64545 via UDP Socket
-        server.sendto(dataBytes, ('<broadcast>', 64545))
+            # Broadcast message to port 64545 via UDP Socket
+            server.sendto(dataBytes, ('<broadcast>', 64545))
 
-        # Show a message on the display
-        sense.show_message( "sent", scroll_speed=0.05 )
+            # Show a message on the display
+            sense.show_message( "sent", scroll_speed=0.05 )
         
         # check hvis man har trykket på joystick for at stoppe/starte program (while løkke forneden)
-        # for e in sense.stick.get_events():
-        #     if e.action == 'pressed' and e.direction == 'middle':
-        #         state = True if state == False else False
+        for e in sense.stick.get_events():
+            if e.action == 'pressed' and e.direction == 'middle':
+                state = True if state == False else False
