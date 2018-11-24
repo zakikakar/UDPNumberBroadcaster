@@ -35,8 +35,8 @@ while True:
         "n": number
     }
 
-    # Broadcast message to port 64545 via UDP Socket
-    s.sendto((json.dumps(data, default = str)).encode(), ('<broadcast>', 64545))
+    # Broadcast message to port 64545 via UDP Socket 
+    s.sendto((json.dumps(data, default = str)).encode(), ('<broadcast>', 64545)) #Broadcaster her ud til det valgt portnumber.
 
     sense.show_message(str(number), scroll_speed=0.1, text_colour=yellow, back_colour=blue)
 
